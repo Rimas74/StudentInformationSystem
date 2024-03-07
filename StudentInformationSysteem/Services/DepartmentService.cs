@@ -28,7 +28,7 @@ namespace StudentInformationSystem.Services
             var department = await _departmentRepository.GetByIdAsync(departmentId);
             var lecture = await _lectureRepository.GetByIdAsync(lectureId);
 
-            if (department == null && lecture != null)
+            if (department != null && lecture != null)
                 {
                 if (department.Lectures == null)
                     {
