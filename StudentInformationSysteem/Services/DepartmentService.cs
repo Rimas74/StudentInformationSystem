@@ -1,5 +1,7 @@
-﻿using StudentInformationSystem.Models;
-using StudentInformationSystem.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.Data;
+using StudentInformationSystem.Models;
+using StudentInformationSystem.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,75 +12,72 @@ namespace StudentInformationSystem.Services
     {
     public class DepartmentService : IDepartmentService
         {
-        private readonly IRepository<Department> _departmentRepository;
-        private readonly IRepository<Student> _studentRepository;
-        private readonly IRepository<Lecture> _lectureRepository;
-
-        public DepartmentService(IRepository<Department> departmentRepository,
-                                 IRepository<Student> studentRepository,
-                                 IRepository<Lecture> lectureRepository)
-            {
-            _departmentRepository = departmentRepository;
-            _studentRepository = studentRepository;
-            _lectureRepository = lectureRepository;
-            }
-
         public async Task AddLectureToDepartmentAsync(int lectureId, int departmentId)
             {
-            var department = await _departmentRepository.GetByIdAsync(departmentId);
-            var lecture = await _lectureRepository.GetByIdAsync(lectureId);
-
-            if (department != null && lecture != null)
+            using (var context = new StudentInfoContext())
                 {
-                if (department.Lectures == null)
+                var lecture = await context.Lectures.FindAsync(lectureId);
+                var department = await context.Departments.FindAsync(departmentId);
+                if (lecture != null && department != null)
                     {
-                    department.Lectures = new List<Lecture>();
+                    department.Lectures.Add(lecture);
+                    await context.SaveChangesAsync();
                     }
-                department.Lectures.Add(lecture);
-                await _departmentRepository.UpdateAsync(department);
                 }
             }
 
         public async Task AddStudentToDepartmentAsync(int studentId, int departmentId)
             {
-            var department = await _departmentRepository.GetByIdAsync(departmentId);
-            var student = await _studentRepository.GetByIdAsync(studentId);
-
-            if (department != null && student != null)
+            using (var context = new StudentInfoContext())
                 {
-                if (department.Students == null)
+                var student = await context.Students.FindAsync(studentId);
+                var department = await context.Departments.FindAsync(departmentId);
+                if (student != null && department != null)
                     {
-                    department.Students = new List<Student>();
+                    department.Students.Add(student);
+                    await context.SaveChangesAsync();
+
                     }
-                department.Students.Add(student);
-                await _departmentRepository.UpdateAsync(department);
                 }
             }
 
-        public async Task CreateDepartmentAsync(Department department)
+        public async Task<Department> CreateDepartmentAsync(Department department)
             {
-            await _departmentRepository.AddAsync(department);
-            }
 
-        public async Task DeleteDepartmentAsync(int departmentId)
-            {
-            await _departmentRepository.DeleteAsync(departmentId);
+            using (var context = new StudentInfoContext())
+                {
+                context.Departments.Add(department);
+                await context.SaveChangesAsync();
+                return department;
+                }
             }
 
         public async Task<IEnumerable<Department>> GetAllDepartmentsAsync()
             {
-            return await _departmentRepository.GetAllAsync();
+            using (var context = new StudentInfoContext())
+                {
+                return await context.Departments.ToListAsync();
+                }
             }
 
-        public async Task<Department> GetDepartmentByIdAsync(int departmentId)
+        public async Task<IEnumerable<Lecture>> GetAllLecturesInDepartmentAsync(int departmentId)
             {
-            return await _departmentRepository.GetByIdAsync(departmentId);
+            using (var context = new StudentInfoContext())
+                {
+                var department = await context.Departments.FindAsync(departmentId);
+                return department?.Lectures.ToList() ?? new List<Lecture>();
+                }
             }
 
-        public async Task UpdateDepartmentAsync(Department department)
+        public async Task<IEnumerable<Student>> GetAllStudentsInDepartmentAsync(int departmentId)
             {
-            await _departmentRepository.UpdateAsync(department);
+            using (var context = new StudentInfoContext())
+                {
+                var department = await context.Departments.FindAsync(departmentId);
+                return department?.Students.ToList() ?? new List<Student>();
+                };
             }
+
+
         }
-
     }

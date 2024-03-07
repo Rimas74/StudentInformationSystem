@@ -4,7 +4,8 @@
         {
         static void Main(string[] args)
             {
-            Console.WriteLine("Hello, World!");
+            //var connectonString = "";
+            //var departmentRepository = new DepartmentService(connectionString);
             }
         }
     }
