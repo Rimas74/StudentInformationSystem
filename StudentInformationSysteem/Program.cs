@@ -2,6 +2,7 @@
 using StudentInformationSystem.Models;
 using StudentInformationSystem.Repositories;
 using StudentInformationSystem.Services;
+using StudentInformationSystem.Services.Interfaces;
 
 namespace StudentInformationSysteem
     {
@@ -46,6 +47,7 @@ namespace StudentInformationSysteem
             var studentRepository = new StudentRepository();
             var departmentService = new DepartmentService(departmentRepository, lectureRepository, studentRepository);
             var lectureService = new LectureService(lectureRepository, departmentRepository);
+            var studentService = new StudentService(studentRepository, departmentRepository, lectureRepository);
 
 
             #region 1.A. Create a Department.
@@ -59,23 +61,52 @@ namespace StudentInformationSysteem
 
             #endregion
 
-            #region 2.A. Add lectures to an existing department.
+            #region 1.B. Create a new Lecture.
 
-            var newLecture = new Lecture { Title = "Modern History" };
-
-
-
+            //var newLecture = new Lecture { Title = "Modern History" };
+            //await lectureService.CreateLectureAsync(newLecture);
 
             #endregion
 
-            #region 2.B. Add students to an existing department.
+            #region 2.A. Add an existing lecture to an existing department.
 
-
-
-
-
+            //int LectureID = 6;
+            //int departmentId = 2;
+            //await departmentService.AddLectureToDepartmentAsync(LectureID, departmentId);
 
             #endregion
+
+
+            #region 2.C. Add existing student to an existing department.
+
+            #endregion
+
+            #region 4. Create a student, add it to an existing department and assign it to existing lectures.
+
+            // 4.A. Create new student.
+
+            //var newSudent = new Student { Name = "Tim Snaider", DepartmentId = 2 };
+            //await studentService.CreateStudentAsync(newSudent);
+
+            //var newsSudent = new Student { Name = "Jamie Oliver" };
+            //await studentService.CreateStudentAsync(newsSudent);
+
+            // 4.B. Add existing student to an existing department
+
+            //int studentId = 11;
+            //int departmentId = 2;
+            //await departmentService.AddStudentToDepartmentAsync(studentId, departmentId);
+
+            //4.C. Assign student to existing lectures
+
+            //var studentId = 1;
+            //IEnumerable<int> lectureIds = new List<int> { 1, 2, 3, 4, 5 };
+            //await studentService.AssignStudentToLecturesAsync(studentId, lectureIds);
+
+            #endregion
+
+
+
             }
 
         }

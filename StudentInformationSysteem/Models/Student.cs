@@ -19,7 +19,7 @@ namespace StudentInformationSystem.Models
         public string Name { get; set; }
 
         [ForeignKey("DepartmentId")]
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
 
         public Department Department { get; set; }
         public ICollection<Lecture> Lectures { get; set; }

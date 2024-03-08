@@ -39,6 +39,8 @@ namespace StudentInformationSystem.Services
             var student = await _studentRepository.GetByIdAsync(studentId);
             if (student != null)
                 {
+                student.Lectures ??= new List<Lecture>();
+
                 foreach (var lectureId in lectureIds)
                     {
                     var lecture = await _lectureRepository.GetByIdAsync(lectureId);
