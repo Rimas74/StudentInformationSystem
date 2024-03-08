@@ -15,6 +15,7 @@ namespace StudentInformationSystem.Services.Interfaces
         Task UpdateLectureAsync(Lecture lecture);
         Task DeleteLectureAsync(int lectureId);
         Task AssignLectureToDepartmentAsync(int lectureId, int departmentId);
+
         }
     }
 

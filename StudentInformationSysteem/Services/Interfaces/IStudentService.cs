@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentInformationSystem.Services
+namespace StudentInformationSystem.Services.Interfaces
     {
     public interface IStudentService
         {
@@ -17,5 +17,6 @@ namespace StudentInformationSystem.Services
         Task AssignStudentToDepartmentAsync(int studentId, int departmentId);
         Task AssignStudentToLecturesAsync(int studentId, IEnumerable<int> lectureIds);
         Task TransferStudentToAnotherDepartmentAsync(int studentId, int newDepartmentId);
+        Task<IEnumerable<Lecture>> GetAllLecturesByStudentAsync(int studentId);
         }
     }

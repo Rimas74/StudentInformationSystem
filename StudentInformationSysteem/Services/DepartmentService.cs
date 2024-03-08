@@ -89,17 +89,17 @@ namespace StudentInformationSystem.Services
 
             }
 
-        public async Task TransferStudentToAnotherDepartmentAsync(int studentId, int targetDepartmentId)
-            {
-            var student = await _studentRepository.GetByIdAsync(studentId);
-            var targetDepartment = await _departmentRepository.GetByIdAsync(targetDepartmentId);
+        //public async Task TransferStudentToAnotherDepartmentAsync(int studentId, int targetDepartmentId)
+        //{
+        //var student = await _studentRepository.GetByIdAsync(studentId);
+        //var targetDepartment = await _departmentRepository.GetByIdAsync(targetDepartmentId);
 
-            if (student != null && targetDepartment != null)
-                {
-                student.DepartmentId = targetDepartment.DepartmentId;
-                await _studentRepository.UpdateAsync(student);
-                }
-            }
+        //if (student != null && targetDepartment != null)
+        //    {
+        //    student.DepartmentId = targetDepartment.DepartmentId;
+        //    await _studentRepository.UpdateAsync(student);
+        //    }
+        //}
 
         public async Task UpdateDepartmentAsync(Department department)
             {

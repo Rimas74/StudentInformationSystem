@@ -19,7 +19,7 @@ namespace StudentInformationSystem.Services.Interfaces
         Task AddLectureToDepartmentAsync(int lectureId, int departmentId);
         Task<IEnumerable<Student>> GetAllStudentsInDepartmentAsync(int departmentId);
         Task<IEnumerable<Lecture>> GetAllLecturesInDepartmentAsync(int departmentId);
-        Task TransferStudentToAnotherDepartmentAsync(int studentId, int targetDepartmentId);
+        //Task TransferStudentToAnotherDepartmentAsync(int studentId, int targetDepartmentId);
 
         }
     }

@@ -52,6 +52,8 @@ namespace StudentInformationSystem.Services
             return await _lectureRepository.GetAllAsync();
             }
 
+
+
         public async Task<Lecture> GetLectureByIdAsync(int lectureId)
             {
             return await _lectureRepository.GetByIdAsync(lectureId);
