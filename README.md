@@ -1,8 +1,8 @@
-Student Information System
-Overview
+# Student Information System
+## Overview
 The Student Information System is designed to manage student data, departmental information, and records on lectures. 
 
-Features
+## Features
 Department Management: Create, update, and manage departments, including assigning lectures and students.
 Lecture Management: Add and assign lectures to departments and students.
 Student Management: Enroll students, assign them to departments and lectures, and transfer students between departments.
