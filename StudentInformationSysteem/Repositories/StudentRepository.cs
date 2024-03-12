@@ -1,4 +1,5 @@
-﻿using StudentInformationSystem.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.Data;
 using StudentInformationSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -10,36 +11,35 @@ namespace StudentInformationSystem.Repositories
     {
     public class StudentRepository : IRepository<Student>
         {
+
+
         public async Task AddAsync(Student entity)
             {
             using (var context = new StudentInfoContext())
                 {
                 context.Students.Add(entity);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
                 }
-            await Task.CompletedTask;
+
             }
 
         public async Task DeleteAsync(int id)
             {
             using (var context = new StudentInfoContext())
                 {
-                var student = context.Students.Find(id);
+                var student = await context.Students.FindAsync(id);
                 if (student != null)
                     {
                     context.Students.Remove(student);
-                    context.SaveChanges();
+                    await context.SaveChangesAsync();
                     }
-
                 }
-            await Task.CompletedTask;
             }
-
         public async Task<List<Student>> GetAllAsync()
             {
             using (var context = new StudentInfoContext())
                 {
-                return await Task.FromResult(context.Students.ToList());
+                return await context.Students.ToListAsync();
                 }
             }
 
@@ -47,7 +47,9 @@ namespace StudentInformationSystem.Repositories
             {
             using (var context = new StudentInfoContext())
                 {
-                return await Task.FromResult(context.Students.Find(id));
+                return await context.Students
+                     .Include(s => s.Lectures)
+                     .FirstOrDefaultAsync(s => s.StudentId == id);
                 }
             }
 
@@ -56,9 +58,9 @@ namespace StudentInformationSystem.Repositories
             using (var context = new StudentInfoContext())
                 {
                 context.Students.Update(entity);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
                 }
-            await Task.CompletedTask;
+
             }
         }
     }

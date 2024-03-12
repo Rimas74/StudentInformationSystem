@@ -117,8 +117,8 @@ namespace StudentInformationSysteem
 
             //4.C. Assign student to existing lectures
 
-            //var studentId = 1;
-            //IEnumerable<int> lectureIds = new List<int> { 1, 2, 3, 4, 5 };
+            //var studentId = 5;
+            //IEnumerable<int> lectureIds = new List<int> { 1, 2, 5, 6, 7 };
             //await studentService.AssignStudentToLecturesAsync(studentId, lectureIds);
 
             #endregion
@@ -157,6 +157,14 @@ namespace StudentInformationSysteem
             #endregion
 
             #region 8.Display all lectures by student.
+
+            var studentId = 5;
+            var lecturesForStudent = await studentService.GetAllLecturesByStudentAsync(studentId);
+            Console.WriteLine($"Lectures assigned to the student {studentId}");
+            foreach (var lecture in lecturesForStudent)
+                {
+                Console.WriteLine($"- {lecture.Title}");
+                }
 
 
             #endregion
