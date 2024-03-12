@@ -77,9 +77,27 @@ namespace StudentInformationSysteem
             #endregion
 
 
-            #region 2.C. Add existing student to an existing department.
+            #region 2.B. Add existing student to an existing department.
+            //int studentId = 3;
+            //int departmentId = 2;
+
+            //await departmentService.AddStudentToDepartmentAsync(studentId, departmentId);
 
             #endregion
+
+            #region 3.A. Create a lecture.
+            //var newLecture = new Lecture() { Title = "History of Europe" };
+            //await lectureService.CreateLectureAsync(newLecture);
+            #endregion
+
+            #region 3.B. Lecture assign to a department.
+
+            //var lectureId = 7;
+            //var departmentId = 2;
+            //await departmentService.AddLectureToDepartmentAsync(lectureId, departmentId);
+
+            #endregion
+
 
             #region 4. Create a student, add it to an existing department and assign it to existing lectures.
 
@@ -105,6 +123,43 @@ namespace StudentInformationSysteem
 
             #endregion
 
+            #region 5. Transfer the student to another department 
+            //var studentId = 1;
+            //var departmentId = 2;
+
+            //await studentService.TransferStudentToAnotherDepartmentAsync(studentId, departmentId);
+
+            #endregion
+
+            #region 6.Display all students in the department.
+
+            //var departmentId = 2;
+            //var studentsInDepartment = await departmentService.GetAllStudentsInDepartmentAsync(departmentId);
+            //Console.WriteLine($"Students in Department ID {departmentId}:");
+            //foreach (var student in studentsInDepartment)
+            //    {
+            //    Console.WriteLine($"- {student.Name}");
+            //    }
+
+            #endregion
+
+            #region 7. Display all lectures in the department.
+
+            //var departmentId = 2;
+            //var lecturesInDepartment = await departmentService.GetAllLecturesInDepartmentAsync(departmentId);
+
+            //Console.WriteLine($"Lectures in Department ID {departmentId}:");
+            //foreach (var lecture in lecturesInDepartment)
+            //    {
+            //    Console.WriteLine($"- {lecture.Title}");
+            //    }
+
+            #endregion
+
+            #region 8.Display all lectures by student.
+
+
+            #endregion
 
 
             }

@@ -1,64 +1,53 @@
-﻿using StudentInformationSystem.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentInformationSystem.Data;
 using StudentInformationSystem.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StudentInformationSystem.Repositories
     {
     public class DepartmentRepository : IRepository<Department>
         {
+        private readonly StudentInfoContext _context;
+
+        public DepartmentRepository()
+            {
+            _context = new StudentInfoContext();
+            }
+
         public async Task AddAsync(Department entity)
             {
-            using (var context = new StudentInfoContext())
-                {
-                context.Departments.Add(entity);
-                context.SaveChanges();
-                }
-            await Task.CompletedTask;
+            _context.Departments.Add(entity);
+            await _context.SaveChangesAsync();
             }
 
         public async Task DeleteAsync(int id)
             {
-            using (var context = new StudentInfoContext())
+            var department = await _context.Departments.FindAsync(id);
+            if (department != null)
                 {
-                var department = context.Departments.Find(id);
-                if (department != null)
-                    {
-                    context.Departments.Remove(department);
-                    context.SaveChanges();
-                    }
-                };
+                _context.Departments.Remove(department);
+                await _context.SaveChangesAsync();
+                }
             }
 
         public async Task<List<Department>> GetAllAsync()
             {
-            using (var context = new StudentInfoContext())
-                {
-                return await Task.FromResult(context.Departments.ToList());
-                };
+            return await _context.Departments.ToListAsync();
             }
 
         public async Task<Department> GetByIdAsync(int id)
             {
-            using (var context = new StudentInfoContext())
-                {
-                return await Task.FromResult(context.Departments.Find(id));
-                };
+            return await _context.Departments
+                                 .Include(d => d.Students)
+                                 .Include(l => l.Lectures)
+                                 .FirstOrDefaultAsync(d => d.DepartmentId == id);
             }
 
         public async Task UpdateAsync(Department entity)
             {
-            using (var context = new StudentInfoContext())
-                {
-                context.Departments.Update(entity);
-                context.SaveChanges();
-                }
-            await Task.CompletedTask;
+            _context.Departments.Update(entity);
+            await _context.SaveChangesAsync();
             }
-
-
         }
     }
