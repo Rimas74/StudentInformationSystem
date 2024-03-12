@@ -23,16 +23,6 @@ namespace StudentInformationSystem.Data
             base.OnModelCreating(modelBuilder);
 
 
-
-            //modelBuilder.Entity<Department>()
-            //    .HasMany(d => d.Lectures)
-            //    .WithMany(l => l.Departments);
-
-            //modelBuilder.Entity<Student>()
-            //    .HasMany(s => s.Lectures)
-            //    .WithMany(l => l.Students);
-
-
             }
         }
     }

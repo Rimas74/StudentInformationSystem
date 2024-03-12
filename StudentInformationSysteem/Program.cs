@@ -53,8 +53,7 @@ namespace StudentInformationSysteem
             #region 1.A. Create a Department.
 
 
-
-            //var newDepartment = new Department { Name = "History" };
+            //var newDepartment = new Department { Name = "Biology" };
             //await departmentService.CreateDepartmentAsync(newDepartment);
 
             //Console.WriteLine($"Department created {newDepartment.Name}");
@@ -158,7 +157,7 @@ namespace StudentInformationSysteem
 
             #region 8.Display all lectures by student.
 
-            var studentId = 5;
+            var studentId = 1;
             var lecturesForStudent = await studentService.GetAllLecturesByStudentAsync(studentId);
             Console.WriteLine($"Lectures assigned to the student {studentId}");
             foreach (var lecture in lecturesForStudent)
